@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Form</title>
+   <style>
+    body {
+    font-family: Arial, sans-serif;
+   
+}
+form{
+    background-color:whitesmoke;
+   border-radius: 10px;
+    margin: 100px  150px;
+}
+.section {
+    margin-bottom: 20px;
+}
+
+.row {
+    
+    justify-content:space-around;
+   margin-left: 30px;
+    margin-bottom: 10px;
+    padding-top: 20px;
+}
+
+label {
+    width: 120px;
+    margin-right: 10px;
+}
+
+select, input {
+    padding: 10px 60px;
+    margin-right: 40px;
+    margin-left: 0;
+    text-decoration: none;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+
+.add-product-btn {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: 30px;
+}
+
+button[type="submit"] {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: 550px;
+}
+
+   </style>
+</head>
+<body>
+    <form>
+        <div class="section">
+            <div class="row">
+                <label for="doctor-name">Doctor Name:</label>
+                <select id="doctor-name">
+                    <option value="">Choose...</option>
+                </select>
+                <label for="hospital-name">Hospital Name:</label>
+                <select id="hospital-name">
+                    <option value="">Choose...</option>
+                </select>
+                <label for="date-of-surgery">Date of Surgery:</label>
+                <input type="date" id="date-of-surgery">
+            </div>
+            <div class="row">
+                <label for="category">Category:</label>
+                <select id="category">
+                    <option value="">Choose...</option>
+                </select>
+                <label for="sub-category">Sub-Category:</label>
+                <select id="sub-category">
+                    <option value="">Choose...</option>
+                </select>
+                <label for="payment-type">Payment Type:</label>
+                <select id="payment-type">
+                    <option value="">Choose...</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="row">
+                <label for="principle-name">Principle Name:</label>
+                <select id="principle-name">
+                    <option value="">Choose...</option>
+                </select>
+                <label for="products">Products:</label>
+                <select id="products">
+                    <option value="">Select Products</option>
+                </select>
+              
+            </div>
+            <button type="button" class="add-product-btn">Add Product</button>
+        </div>
+
+        <div class="section">
+            <div class="row">
+                <label for="patient-name">Patient Name:</label>
+                <input type="text" id="patient-name" placeholder="Patient Name">
+                <label for="ip-no">IP No:</label>
+                <input type="text" id="ip-no" placeholder="IP No">
+            </div>
+            <div class="row">
+                <label for="delivered-by">Delivered By:</label>
+                <select id="delivered-by">
+                    <option value="">Select...</option>
+                </select>
+                <label for="collected-by">Collected By:</label>
+                <select id="collected-by">
+                    <option value="">Select...</option>
+                </select>
+            </div>
+            <button type="submit">Submit</button>
+        </div>
+    </form>
+</body>
+</html>

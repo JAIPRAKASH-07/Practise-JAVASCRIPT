@@ -1,0 +1,58 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delete</title>
+</head>
+
+<body>
+
+    <button id="deletebtnid"> delete Button </button>
+
+    <script>
+        //DELETE
+            // document.querySelector("#deletebtnid")
+            // .addEventListener('click', (e)=>{
+            //     const URL = 'https://jsonplaceholder.typicode.com/posts/12';
+               
+            //     fetch(URL, {
+            //         method: "DELETE"
+            //     })
+            //       // Converting to JSON
+            //     .then(response => response.json())
+            //     // Displaying results to console
+            //     .then(json =>{
+            //         console.log(json)
+            //         console.log("Successfully Deleted");
+            //     } )
+            //     .catch(err => console.log(err));
+            // });
+
+
+            document.querySelector("#deletebtnid")
+            .addEventListener('click', (e)=>{
+                let id = 2;
+               // const URL = 'https://jsonplaceholder.typicode.com/posts/'+id;
+
+               const URL = `https://jsonplaceholder.typicode.com/posts/${id}`;
+               
+                fetch(URL, {
+                    method: "DELETE"
+                })
+                  // Converting to JSON
+                .then(response => response.json())
+                // Displaying results to console
+                .then(json =>{
+                    console.log(json)
+                    console.log("Successfully Deleted");
+                } )
+                .catch(err => console.log(err));
+            });
+
+         </script>
+</body>
+</html>

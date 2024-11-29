@@ -1,0 +1,189 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration</title>
+</head>
+
+<body>
+    <h2>Registration Form</h2>
+
+    <h3 id="msgid" style="color: blue;"></h3>
+
+    <form id="empformid">
+        <input type="hidden" name="id" value="jai">
+        <label>FirstName:</label>
+        <input type="text" name="firstName" id="firstName" value="">
+        <br><br>
+        <label>LastName:</label>
+        <input type="text" name="lastName" id="lastName" value="">
+        <br><br>
+        <label>Email:</label>
+        <input type="text" name="email" id="email" value="">
+        <br><br>
+        <label>Phone:</label>
+        <input type="text" name="phone" id="phone" value="">
+        <br><br>
+
+        <input type="radio" id="genderMale" name="gender" value="male" checked />
+        <label for="genderMale">Male</label>
+
+        <input type="radio" id="genderFemale" name="gender" value="female" />
+        <label for="genderFemale">Female</label>
+
+        <br><br>
+        <input type="checkbox" name="qf" id="qualificationid1" value="BE/B.Tech">
+        BE/B.Tech
+        <input type="checkbox" name="qf" id="qualificationid2" value="ME/M.Tech">
+        ME/M.Tech
+        <input type="checkbox" name="qf" id="qualificationid3" value="PHD">
+        PHD
+
+        <br><br>
+
+        <label for="stateid">Select State</label>
+        <select id="stateid">
+            <option value="KA">Karnataka</option>
+            <option value="AP">Andhra Pradesh</option>
+            <option value="TS">Telangana</option>
+            <option value="TN">Tamil Nadu</option>
+        </select>
+
+        <br><br>
+
+        <label for="hobbiesid">Select Hobbies</label>
+        <select id="hobbiesid" multiple>
+            <option value="cricket">Cricket</option>
+            <option value="singing">Singing</option>
+            <option value="playing">Playing</option>
+            <option value="driving">Driving</option>
+        </select>
+
+        <br><br>
+        <button id="postid">Post</button>
+        <button id="getallid">Get All</button>
+
+    </form>
+    <hr>
+    <table border="1" id="tableid">
+        <thead>
+            <tr>
+                <th>id</th>
+                <th>FirstName</th>
+                <th>LastName</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Qualification</th>
+                <th>Gender</th>
+                <th>State</th>
+                <th>Hobbies</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Rows will be appended here -->
+        </tbody>
+    </table>
+
+    <script>
+        const form = document.querySelector("#empformid");
+
+        document.querySelector('#postid').addEventListener('click', (e) => {
+            e.preventDefault();
+
+            const firstName = form.elements['firstName'].value;
+            const lastName = form.elements['lastName'].value;
+            const email = form.elements['email'].value;
+            const phone = form.elements['phone'].value;
+
+            const gender = document.querySelector('input[name="gender"]:checked').value;
+
+            const qualifications = Array.from(document.querySelectorAll('input[name="qf"]:checked')).map(el => el.value);
+            const state = document.querySelector('#stateid').value;
+
+            const hobbies = Array.from(document.querySelector('#hobbiesid').selectedOptions).map(el => el.value);
+
+            const employee = {
+                firstName,
+                lastName,
+                email,
+                mobileNumber: phone,
+                qualification: qualifications.length ? qualifications.toString() : null,
+                gender,
+                state,
+                hobbies: hobbies.length ? hobbies.toString() : null,
+            };
+
+            fetch('http://77.37.45.2:9081/api/v1/employee/saveemployee', {
+                method: 'POST',
+                body: JSON.stringify(employee),
+                headers: {
+                    "Content-Type": "application/json; charset=UTF-8"
+                }
+            })
+                .then(response => response.json())
+                .then(json => {
+                    if (json.status) {
+                        document.getElementById('msgid').innerHTML = "Sorry, Not created, try again";
+                    } else {
+                        document.getElementById('msgid').innerHTML = "Congratulations, Successfully Created";
+                    }
+                })
+                .catch(err => console.error(err));
+        });
+
+        document.querySelector('#getallid').addEventListener('click', (e) => {
+            e.preventDefault();
+
+            fetch('http://77.37.45.2:9081/api/v1/employee/fetchallemployees')
+                .then(response => response.json())
+                .then(data => {
+                    const tableBody = document.querySelector('#tableid tbody');
+                    tableBody.innerHTML = ''; // Clear existing rows
+
+                    data.forEach(employee => {
+                        const row = document.createElement('tr');
+
+                        row.innerHTML = `
+                            <td>${employee.id}</td>
+                            <td>${employee.firstName || ''}</td>
+                            <td>${employee.lastName || ''}</td>
+                            <td>${employee.email || ''}</td>
+                            <td>${employee.mobileNumber || ''}</td>
+                            <td>${employee.qualification || ''}</td>
+                            <td>${employee.gender || ''}</td>
+                            <td>${employee.state || ''}</td>
+                            <td>${employee.hobbies || ''}</td>
+                            <td>
+                                <button onclick="editEmployee(${employee.id})">Edit</button>
+                                <button onclick="deleteEmployee(${employee.id})">Delete</button>
+                            </td>
+                        `;
+
+                        tableBody.appendChild(row);
+                    });
+                })
+                .catch(error => console.error('Error fetching employees:', error));
+        });
+
+        function editEmployee(id) {
+            // Implement the edit functionality here
+            console.log(`Edit employee with ID: ${id}`);
+        }
+
+        function deleteEmployee(id) {
+            fetch(`http://77.37.45.2:9081/api/v1/employee/deleteemployee/${id}`, {
+                method: 'DELETE'
+            })
+                .then(response => response.json())
+                .then(data => {
+                    console.log('Employee deleted:', data);
+                    document.querySelector('#getallid').click(); // Refresh the table after deletion
+                })
+                .catch(err => console.error(err));
+        }
+    </script>
+</body>
+
+</html>

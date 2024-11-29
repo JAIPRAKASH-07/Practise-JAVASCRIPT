@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>   
+    <title>Document</title>
+</head>
+<body>
+    <h1 id="h1id">Hello World</h1>
+    <p id="pid" >I am a paragraph tag </p>
+    <h2 id="h2id"> </h2>
+   
+    <script>
+       console.log(window.document);
+      //let h1tag = window.document.getElementById("h1id");
+      let h1tag = document.getElementById("h1id");
+       console.log(h1tag.innerText);
+
+    let h1tagcontent = document.getElementById("h1id").innerText;
+    console.log(h1tagcontent);
+
+       console.log(document.body.children); 
+
+       let bodyChildrensList = document.body.children;
+       console.log(bodyChildrensList[0].innerHTML);
+
+       console.log(bodyChildrensList[1].innerHTML);
+
+       let ptagcontent = window.document.getElementById("pid").innerHTML;
+       console.log(ptagcontent);
+
+       //Hello H2 Tag
+       document.getElementById("h2id").innerHTML = "Hello H2 Tag How are you"
+    
+
+    let div1taglist = document.getElementById("div1tag");
+    //    console.log(div1taglist);
+       // console.log(div1taglist.children[0].innerHTML);
+        //console.log(div1taglist.children[1].previousElementSibling);//h2
+       //console.log(div1taglist.children[1].nextElementSibling);//h2
+      // console.log(div1taglist.children[0].nextElementSibling.nextElementSibling);
+      //  console.log(div1taglist.children[2].previousElementSibling.previousElementSibling);
+      //  console.log(div1taglist.firstElementChild);
+      //  console.log(div1taglist.lastElementChild);
+     //  console.log(div1taglist.children[2].parentElement);
+
+    //  console.log(div1taglist.children[2].parentElement.parentElement.firstElementChild);
+    //  document.getElementById("pid").nextElementSibling.innerHTML = "Hello XYZ"
+    // console.log(div1taglist.childElementCount); 
+
+  </script>
+
+
+</body>
+</html>
+

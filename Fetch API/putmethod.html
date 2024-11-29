@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Put</title>
+</head>
+
+<body>
+
+    <button id="putbtnid"> Put Button </button>
+
+    <script>
+      //PUT
+      document.querySelector("#putbtnid")
+            .addEventListener('click', (e)=>{
+                const URL = 'https://jsonplaceholder.typicode.com/posts/1';
+                const emp = {
+                        userId: 1,
+                        title: "Java Script Session for Today",
+                        body: "Welcome to JS Session"
+                    }
+
+                fetch(URL, {
+                    method: "PUT",
+                    body: JSON.stringify(emp),
+
+                    // Adding headers to the request
+                headers: {
+                    "Content-type": "application/json; charset=UTF-8"
+                    }
+                })
+                  // Converting to JSON
+                .then(response => response.json())
+                // Displaying results to console
+                .then(json =>{
+                    console.log(json)
+                    console.log("Successfully Updated");
+                } )
+                .catch(err => console.log(err));
+
+            });
+         </script>
+</body>
+</html>

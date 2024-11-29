@@ -1,0 +1,52 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+</head>
+<body>
+    <label>Value 1:</label>
+    <input type="text" id="val1"><br>
+
+    <label>Value 2:</label>
+    <input type="text" id="val2">
+    <br><br>
+    <div class="calculatordiv">
+        <label for="Addid">Add</label>
+        <input type="radio" name="operation" id="Addid">
+        <label for="Subid">Subtract</label>
+        <input type="radio" name="operation" id="Subid">
+        <label for="Mulid">Multiply</label>
+        <input type="radio" name="operation" id="Mulid">
+        <label for="Divid">Divide</label>
+        <input type="radio" name="operation" id="Divid">
+    </div>
+    <br>
+    <button onclick="calculate()">Calculate</button>
+    <p id="result"></p>
+    <script>
+        function calculate() {
+            const num1 = Number(document.getElementById("val1").value);
+            const num2 = Number(document.getElementById("val2").value);
+
+            if (document.getElementById('Addid').checked) {
+                const add = num1 + num2;
+                document.getElementById("result").innerText = add;
+            } else if (document.getElementById('Subid').checked) {
+                const sub = num1 - num2;
+                document.getElementById("result").innerText = sub;
+            } else if (document.getElementById('Mulid').checked) {
+                const mul = num1 * num2;
+                document.getElementById("result").innerText = mul;
+            } else if (document.getElementById('Divid').checked) {
+                const div = num1 / num2;
+                document.getElementById("result").innerText = div;
+            } else {
+                console.log("Please select an operation.");
+            }
+        }
+    </script>
+</body>
+</html>

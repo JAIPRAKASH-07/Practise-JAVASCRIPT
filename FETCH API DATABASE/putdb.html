@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <h1>Employee Registration</h1>
+
+    <button id="putbtnid"> POST Button </button>
+
+    >
+
+    
+
+    <script>
+            document.querySelector("#putbtnid")
+            .addEventListener('click', (e)=>{
+                const URL = 'http://77.37.45.2:9081/api/v1/employee/updateemployee/1';
+                const emp = {
+                       "firstName": "Meera",
+                        "lastName": "S V",
+                        "email": "meera@gmail.com",
+                        "mobileNumber": "9889838383",
+                        "qualification": "BE, ME, PHD",
+                        "gender": "Female"
+                    }
+
+                fetch(URL, {
+                    mode: 'cors',
+                    credentials: 'include',
+                    method: "PUT",
+                    body: JSON.stringify(emp),
+                    headers: {
+                        "Content-type": "application/json; charset=UTF-8",
+                        'Access-Control-Allow-Origin': 'http://localhost:5500',
+                        'Access-Control-Allow-Credentials': 'true'
+                        }
+                })
+                  // Converting to JSON
+                .then(response => response.json())
+                // Displaying results to console
+                .then(json =>{
+                    console.log(json)
+                    console.log("Successfully Updated");
+                } )
+                .catch(err => console.log(err));
+            });
+ 
+
+
+        </script>
+       
+            
+        </body>
+        </html>

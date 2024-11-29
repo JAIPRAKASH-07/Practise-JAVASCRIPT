@@ -1,0 +1,10 @@
+
+
+map() method:  a given function on all the elements of the array and returns the updated array.
+  the simpler and shorter code instead of a loop.
+reduce() method:  the elements of the array to a single value by repeatedly applying a function.
+ alternative of using a loop and updating the result for every scanned element.
+filter() method: the elements of the array that return false for the applied condition and 
+returns the array which contains elements that satisfy the applied condition.
+
+

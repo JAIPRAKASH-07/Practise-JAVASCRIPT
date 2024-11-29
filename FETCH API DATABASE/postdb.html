@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <h1>Employee Registration</h1>
+
+    <button id="postbtnid"> POST Button </button>
+
+    <button id="btnbyid"> Get By ID Button </button>
+
+    
+
+    <script>
+        //POST
+        document.querySelector("#postbtnid")
+            .addEventListener('click', (e)=>{
+                const URL = ' http://77.37.45.2:9081/api/v1/employee/saveemployee';               
+                const emp = {
+                                "firstName": "ChRam",
+                                "lastName": "Kumar",
+                                "email": "chai@gmail.com",
+                                "mobileNumber": "67845675",
+                                "qualification": "BE, ME",
+                                "gender": "male"
+                            }
+
+                fetch(URL, {
+                    method: "POST",
+                    body: JSON.stringify(emp),
+
+                    // Adding headers to the request
+                headers: {
+                    "Content-type": "application/json; charset=UTF-8"
+                    }
+                })
+                  // Converting to JSON
+                .then(response => response.json())
+                // Displaying results to console
+                .then(json =>{
+                    console.log(json)
+                    console.log("Successfully Created/POSTed");
+                } )
+                // .catch(err => console.log(err));
+
+            });
+
+
+        //     let btn = document.querySelector("#btnbyid");
+        //     btn.addEventListener('click', async function(e){
+       
+        //     let id = 2;
+        //     const URL = `http://localhost:8081/api/v1/employee/fetchemployee/${id}`;
+        //     fetch(URL, {
+        //             method: 'GET'
+        //         })          
+        //         .then((res) => res.json())
+        //         .then((resp)=> {
+        //             console.log(resp);
+        //         })
+        //         .catch(err => console.log(err));
+
+        // });
+
+
+        </script>
+       
+            
+        </body>
+        </html>

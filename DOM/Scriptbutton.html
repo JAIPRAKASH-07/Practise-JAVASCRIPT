@@ -1,0 +1,30 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1 id="h1tagid">Hello Begaluru</h1>
+    <button onclick="displayme()" >Click Me</button>
+    <button onclick="alert('I am an allert')" >Show Me</button>
+    <button id="button1" >Click on </button>
+
+
+    <script>
+        function displayme(){
+            console.log("Test Me");
+        }
+
+        let btn1 = document.getElementById("button1");
+        console.log(btn1.innerHTML);
+
+        btn1.addEventListener('click', ()=> {
+            console.log("Hello addEventListener");
+        });
+
+       
+       
+    </script>
+</body>
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Addition</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 400px;
+            text-align: center;
+        }
+
+        input[type="text"] {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        #output {
+            margin-top: 20px;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Add Numbers from String</h1>
+        <input type="text" id="inputString" placeholder="Enter string with numbers" />
+        <button onclick="processString()">Get Sum</button>
+        <div id="output"></div>
+    </div>
+
+    <script>
+        function processString() {
+            const inputString = document.getElementById('inputString').value;
+            const outputDiv = document.getElementById('output');
+
+           
+            const numbers = inputString.match(/\d+/g);
+            let sum = 0;
+
+            if (numbers) {
+               
+                sum = numbers.reduce((acc, num) => acc + parseInt(num), 0);
+            }
+
+            outputDiv.innerHTML = `Sum of numbers: ${sum}`;
+        }
+    </script>
+
+</body>
+</html>

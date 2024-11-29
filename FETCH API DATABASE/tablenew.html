@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>table new</title>
+</head>
+<body>
+    <h3>ALL Employees</h3>
+
+    <button id="getallid">Get All</button>
+<br><br>
+
+<form id="empformid">
+    <input type="hidden" name="id" value="">
+    <label>FirstName:</label>
+    <input type="text" name="firstName" id="firstName" value="">
+   
+
+
+    
+    <label>LastName:</label>
+    <input type="text" name="lastName" value="">
+   
+    <label>Email:</label>
+    <input type="text" name="email" value="">
+   
+    <label>Phone:</label>
+    <input type="text" name="phone" value="">
+   
+    <label for="genderid">Gender</label>
+    <input type="radio" id="genderid" name="gender" value="male" checked/>
+    <label for="genderid">Male</label>
+
+    <input type="radio" id="genderid2" name="gender" value="female" />
+    <label for="genderid2">Female</label>
+    <br>
+    <br>
+    <label for="qf">Qualification</label>
+    <input type="checkbox" name="qf" id="qulificationid" value="BE/B.Tech">
+     BE/B.Tech
+    <input type="checkbox" name="qf" id="qulificationid" value="ME/M.Tech">
+     ME/M.Tech
+    <input type="checkbox" name="qf" id="qulificationid" value="PHD">
+     PHD
+
+    <br><br>
+
+    <label for="stateid">Select State</label>
+    <select id="stateid">
+        <option value="KA">Karnataka</option>
+        <option value="AP">Andhra Pradesh</option>
+        <option value="TS">Telangana</option>
+        <option value="TN">TamilNadu</option>
+    </select>
+
+  
+
+    <label for="hobbiesid">Select Hobbies</label>
+    <select id="hobbiesid" multiple>
+        <option value="cricket">Cricket</option>
+        <option value="singning">singning</option>
+        <option value="playing">Playing</option>
+        <option value="driving">driving</option>
+        <option value="Painting">Painting</option>
+        <option value="Video game">Video game</option>
+        <option value="Dance">Dance</option>
+        <option value="Foreign language">  Foreign language</option>
+    </select>
+</form>
+<br><br>
+    <table border="1" id="tableid">
+
+        <tr>
+            <th>ID</th>
+            <th>FirstName</th>
+            <th>LastName</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Gender</th>
+            <th>Qualification</th>
+            <th>State</th>   
+            <th>Hobbies</th>   
+            <th>Actions</th>       
+        </tr>
+
+    </table>
+
+
+    <script>
+      
+        let getallele = document.querySelector("#getallid");
+        let tableele = document.getElementById('tableid');
+        getallele.addEventListener('click', (e)=> {      
+          e.preventDefault() ;
+         const URL = " http://77.37.45.2:9081/api/v1/employee/fetchallemployees";
+         fetch(URL, {
+            method: 'GET'
+         })
+         //reading response
+           .then(response => response.json())
+           .then(data => {
+            console.log(data);
+            let da= data.length/65;
+                for(let index = 0; index < da; index++) {
+                    
+                    const employee = data[index];
+                    let rowele = document.createElement('tr');
+
+                    let idtdele = document.createElement('td');
+                    idtdele.textContent = employee.id;
+                    rowele.appendChild(idtdele);
+
+                    let firstnametdele = document.createElement('td');
+                    firstnametdele.textContent = employee.firstName;
+                    rowele.appendChild(firstnametdele);
+
+                    let lastnametdele = document.createElement('td');
+                    lastnametdele.textContent = employee.lastName;
+                    rowele.appendChild(lastnametdele);
+
+                    let emailtdele = document.createElement('td');
+                    emailtdele.textContent = employee.email;
+                    rowele.appendChild(emailtdele);
+
+                    let phonetdele = document.createElement('td');
+                    phonetdele.textContent = employee.mobileNumber;
+                    rowele.appendChild(phonetdele);
+
+                    let gendertdele = document.createElement('td');
+                    gendertdele.textContent = employee.gender;
+                    rowele.appendChild(gendertdele);
+
+                    qualificationtdele = document.createElement('td');
+                    qualificationtdele.textContent = employee.qualification;
+                    rowele.appendChild(qualificationtdele);
+
+                    let statedele = document.createElement('td');
+                    statedele.textContent = employee.state;
+                    rowele.appendChild(statedele);
+
+                    let hobbiestdele = document.createElement('td');
+                    hobbiestdele.textContent = employee.hobbies;
+                    rowele.appendChild(hobbiestdele);
+
+                    let editactiontdele = document.createElement('td');
+                    var edita = document.createElement('button'); 
+                    var editlink = document.createTextNode("Edit");
+                    edita.appendChild(editlink); 
+                
+                
+                edita.addEventListener('click', (e)=> {      
+                              e.preventDefault() ;
+                                
+                              console.log(employee.id);
+                            const URL = `http://77.37.45.2:9081/api/v1/employee/updateemployee/${employee.id}`;
+                             fetch(URL, {
+                             method: 'PUT',
+                             headers:{
+                                'content-Type ':'application/json'
+                             },
+                             body:JSON.stringify({
+                                "firstName": this.firstName,
+                                "lastName": this.lastName,
+                                 "email": this.email,
+                                 "mobileNumber": this.mobileNumber,
+                                  "qualification": "BE, ME, PHD",
+                                  "gender": this.gender,
+                                  headers: {
+                    "Content-type": "application/json; charset=UTF-8"
+                    }
+                })
+                  // Converting to JSON
+                .then(response => response.json())
+                // Displaying results to console
+                .then(json =>{
+                    console.log(json)
+                    console.log("Successfully Updated");
+                } )
+                .catch(err => console.log(err))
+
+            })
+          })
+       
+                  
+                    editactiontdele.appendChild(edita);
+                    rowele.appendChild(editactiontdele);
+
+                    edita.style.paddingRight = '10px';
+
+                    var deletea = document.createElement('button'); 
+                   var deletelink = document.createTextNode("Delete");
+                    deletea.appendChild(deletelink); 
+                
+                    deletea.addEventListener('click', (e)=> {      
+                              e.preventDefault() ;
+                            const URL = `http://77.37.45.2:9081/api/v1/employee/deleteemployee/${employee.id}`;
+                             fetch(URL, {
+                             method: 'DELETE'
+                              })
+                       .then(response => response.json())
+                        .then(data1 => {
+                           console.log(data1);
+                         });
+                         })
+                  
+                    editactiontdele.appendChild(deletea);
+                    rowele.appendChild(editactiontdele);
+                   
+
+                    tableele.appendChild(rowele);
+                                       
+
+                   
+                }
+            });
+        });
+    </script>
+</body>
+</html>

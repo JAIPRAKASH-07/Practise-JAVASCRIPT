@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Navbar with Logo</title>
+   <style>
+    body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    position: relative;
+    text-align: center;
+    background-color: #0ca73d;
+    padding: 10px;
+}
+
+.logo h1 {
+    margin: 0;
+    font-size: 36px;
+    color: #333;
+}
+
+.navbar {
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: flex;
+    gap: 10px;
+    margin: 5px;
+}
+
+.nav-button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.nav-button:hover {
+    background-color: #0056b3;
+}
+
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 10px;
+    background-color: #053e24;
+    width: 80px;
+    height: 100vh;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.aside-button {
+    padding: 15px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+    text-align: left;
+}
+
+.aside-button:hover {
+    background-color: #0056b3;
+}
+   </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Logo Section -->
+        <div class="logo">
+            <h1>My Logo</h1>
+        </div>
+
+        <!-- Navigation Bar -->
+        <nav class="navbar">
+            <button class="nav-button"><a href="./login.html">Login</a></button>
+            <button class="nav-button"><a href="signup.html">Signup</a></button>
+        </nav>
+    </div>
+    <aside class="sidebar">
+        <button class="aside-button">Home</button>
+        <button class="aside-button">About</button>
+        <button class="aside-button">Contact</button>
+        <button class="aside-button">Logout</button>
+    </aside>
+</body>
+</html>

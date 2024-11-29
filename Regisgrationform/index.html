@@ -1,0 +1,340 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration</title>
+</head>
+
+<body>
+    <h2>Registration Form</h2>
+
+    <h3 id="msgid" style="color: blue;"></h3>
+
+    <form id="empformid">
+        <input type="hidden" name="id" value="jai">
+        <label>FirstName:</label>
+        <input type="text" name="firstName" id="firstName" value="">
+        <br><br>
+        <label>LastName:</label>
+        <input type="text" name="lastName" id="lastName" value="">
+        <br><br>
+        <label>Email:</label>
+        <input type="text" name="email" id="email" value="">
+        <br><br>
+        <label>Phone:</label>
+        <input type="text" name="phone" id="phone" value="">
+        <br><br>
+
+        <input type="radio" id="genderid" name="gender" value="male" checked />
+        <label for="genderid">Male</label>
+
+        <input type="radio" id="genderid2" name="gender" value="female" />
+        <label for="genderid2">Female</label>
+
+        <br><br>
+        <input type="checkbox" name="qf" id="qualificationid1" value="BE/B.Tech">
+        BE/B.Tech
+        <input type="checkbox" name="qf" id="qualificationid2" value="ME/M.Tech">
+        ME/M.Tech
+        <input type="checkbox" name="qf" id="qualificationid3" value="PHD">
+        PHD
+
+        <br><br>
+
+        <label for="stateid">Select State</label>
+        <select id="stateid">
+            <option value="KA">Karnataka</option>
+            <option value="AP">Andhra Pradesh</option>
+            <option value="TS">Telangana</option>
+            <option value="TN">Tamil Nadu</option>
+        </select>
+
+        <br><br>
+
+        <label for="hobbiesid">Select Hobbies</label>
+        <select id="hobbiesid" multiple>
+            <option value="cricket">Cricket</option>
+            <option value="singing">Singing</option>
+            <option value="playing">Playing</option>
+            <option value="driving">Driving</option>
+        </select>
+
+        <br><br>
+        <button id="postid">Post</button>
+        <button id="getallid">Get All</button>
+
+    </form>
+    <hr>
+    <table border="1" id="tableid">
+        <thead>
+            <tr>
+                <th>id</th>
+                <th>FirstName</th>
+                <th>LastName</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Qualification</th>
+                <th>Gender</th>
+                <th>State</th>
+                <th>Hobbies</th>
+                <th>Action
+
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Rows will be appended here -->
+        </tbody>
+    </table>
+
+    <script>
+        let form = document.querySelector("#empformid");
+
+        document.querySelector('#postid').addEventListener('click', (e) => {
+            e.preventDefault();
+            let firstName = form.elements['firstName'].value;
+            let lastName = form.elements['lastName'].value;
+            let email = form.elements['email'].value;
+            let phone = form.elements['phone'].value;
+
+            let gender = document.querySelectorAll('input[name="gender"]');
+            let genderele;
+            for (const gender1 of gender) {
+                if (gender1.checked) {
+                    genderele = gender1.value;
+                }
+            }
+
+            let Qf = document.querySelectorAll('input[name="qf"]');
+            let qele = [];
+            for (const Q1 of Qf) {
+                if (Q1.checked) {
+                    qele.push(Q1.value);
+                }
+            }
+
+            let state = document.querySelector('#stateid');
+            let stateele;
+            for (const state1 of state.options) {
+                if (state1.selected) {
+                    stateele = state1.value;
+                }
+            }
+
+            let hobbies = document.querySelector('#hobbiesid');
+            let hoele = [];
+            for (const hobbies1 of hobbies.options) {
+                if (hobbies1.selected) {
+                    hoele.push(hobbies1.value);
+                }
+            }
+
+            let url = 'http://77.37.45.2:9081/api/v1/employee/saveemployee';
+            const employee = {
+                "firstName": firstName,
+                "lastName": lastName,
+                "email": email,
+                "mobileNumber": phone,
+                "qualification": qele.length > 0 ? qele.toString() : null,
+                "gender": genderele,
+                "state": stateele,
+                "hobbies": hoele.length > 0 ? hoele.toString() : null,
+            };
+
+            fetch(url, {
+                method: 'POST',
+                body: JSON.stringify(employee),
+                headers: {
+                    "Content-type": "application/json; charset=UTF-8"
+                }
+            })
+                .then(response => response.json())
+                .then(json => {
+                    console.log("Test", json);
+                    console.log("Successfully Created/POSTed");
+                    if (!json.status) {
+                        document.getElementById('msgid').innerHTML = "Congratulations, Successfully Created";
+                    } else {
+                        document.getElementById('msgid').innerHTML = "Sorry, Not created, try again";
+                    }
+                })
+                .catch(err => console.log(err));
+        });
+
+        document.querySelector('#getallid').addEventListener('click', (eve) => {
+            eve.preventDefault();
+
+            const URL = "http://77.37.45.2:9081/api/v1/employee/fetchallemployees";
+            fetch(URL, { method: 'GET' })
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data);
+                    let tableele = document.querySelector('#tableid tbody');
+                    tableele.innerHTML = ''; // Clear the table body
+                    let datalength = data.length / 10;
+                    for (let index = 0; index < datalength; index++) {
+                        const newEmployee = data[index];
+                        let rowEle = document.createElement('tr');
+
+                        let idTd = document.createElement('td');
+                        idTd.textContent = newEmployee.id;
+                        rowEle.appendChild(idTd);
+
+                        let fNameTd = document.createElement('td');
+                        fNameTd.textContent = newEmployee.firstName;
+                        rowEle.appendChild(fNameTd);
+
+                        let lNameTd = document.createElement('td');
+                        lNameTd.textContent = newEmployee.lastName;
+                        rowEle.appendChild(lNameTd);
+
+                        let emailTd = document.createElement('td');
+                        emailTd.textContent = newEmployee.email;
+                        rowEle.appendChild(emailTd);
+
+                        let phoneTd = document.createElement('td');
+                        phoneTd.textContent = newEmployee.mobileNumber;
+                        rowEle.appendChild(phoneTd);
+
+                        let qualificationTd = document.createElement('td');
+                        qualificationTd.textContent = newEmployee.qualification;
+                        rowEle.appendChild(qualificationTd);
+
+                        let genderTd = document.createElement('td');
+                        genderTd.textContent = newEmployee.gender;
+                        rowEle.appendChild(genderTd);
+
+                        let stateTd = document.createElement('td');
+                        stateTd.textContent = newEmployee.state;
+                        rowEle.appendChild(stateTd);
+
+                        let hobbiesTd = document.createElement('td');
+                        hobbiesTd.textContent = newEmployee.hobbies;
+                        rowEle.appendChild(hobbiesTd);
+                        //edit action of single the edit button 
+
+                        let editactiontdele = document.createElement('td');
+                        let edita = document.createElement('button');
+                        edita.textContent = "Edit";
+                         edita.addEventListener("click", (event) => {
+                                    event.preventDefault();
+                                    let id = empform.elements['id'].value;
+                                    let firstName = empform.elements['firstName'].value;
+                                    let lastName = empform.elements['lastName'].value;
+                                    let email = empform.elements['email'].value;
+                                    let phone = empform.elements['phone'].value;
+
+                                    let gender;
+                                    let genderList = document.querySelectorAll("input[name='gender']");
+                                    for (let gender1 of genderList) {
+                                        if (gender1.checked) {
+                                            gender = gender1.value;
+                                        }
+                                    }
+
+                                    let qualifcations = [];
+                                    let qualielelist = document.querySelectorAll("input[name='qf']");
+                                    for (let qualification of qualielelist) {
+                                        if (qualification.checked) {
+                                            qualifcations.push(qualification.value);
+                                        }
+                                    }
+
+                                    let state;
+                                    const statesb = document.querySelector('#stateid');
+                                    for (var i = 0, len = statesb.options.length; i < len; i++) {
+                                        let opt = statesb.options[i];
+                                        if (opt.selected) {
+                                            state = opt.value;
+                                            break;
+                                        }
+                                    }
+
+                                    let hobbies = [];
+                                    const hobbiessb = document.querySelector('#hobbiesid')
+                                    for (var i = 0, len = hobbiessb.options.length; i < len; i++) {
+                                        let opt = hobbiessb.options[i];
+                                        if (opt.selected) {
+                                            hobbies.push(opt.value);
+                                        }
+                                    }
+
+                                    //call the api
+                                    const employee = {
+                                        "id": id,
+                                        "firstName": firstName,
+                                        "lastName": lastName,
+                                        "email": email,
+                                        "mobileNumber": phone,
+                                        "qualification": qualifcations.length > 0 ? qualifcations.toString() : null,
+                                        "gender": gender,
+                                        "state": state,
+                                        "hobbies": hobbies.length > 0 ? hobbies.toString() : null,
+                                    }
+
+                                    console.log(employee);
+
+                                    //call api to update the empoyee details
+
+                                    const URL = 'http://77.37.45.2:9081/api/v1/employee/updateemployee/' + id;
+
+                                    fetch(URL, {
+                                        method: "PUT",
+                                        body: JSON.stringify(employee),
+                                        headers: {
+                                            "Content-type": "application/json; charset=UTF-8",
+                                            'Access-Control-Allow-Origin': 'http://localhost:5500',
+                                            'Access-Control-Allow-Credentials': 'true'
+                                        }
+                                    })
+                                        // Converting to JSON
+                                        .then(response => response.json())
+                                        // Displaying results to console
+                                        .then(json => {
+
+                                            if (!json.status) {
+                                                document.getElementById('msgid').innerHTML = "Congratulations, Successfully Updated"
+                                                empform.reset();
+                                            } else
+                                                document.getElementById('msgid').innerHTML = "Sorry, Not created, try again"
+
+                                            console.log(json)
+                                            console.log("Successfully Updated");
+                                        })
+                                        .catch(err => console.log(err));
+
+                                });
+                      
+                        edita.style.paddingRight = '10px';
+                        editactiontdele.appendChild(edita);
+
+                        //delete action of single the delete button
+                        let deletea = document.createElement('button');
+                        deletea.textContent = "Delete";
+                        deletea.addEventListener('click', (e) => {
+                            e.preventDefault();
+                            const URL = `http://77.37.45.2:9081/api/v1/employee/deleteemployee/${newEmployee.id}`;
+                            fetch(URL, {
+                                method: 'DELETE'
+                            })
+                                .then(response => response.json())
+                                .then(data1 => {
+                                    console.log(data1);
+                                })
+                                .catch(err => console.log(err));
+                        });
+                        editactiontdele.appendChild(deletea);
+                        rowEle.appendChild(editactiontdele);
+                        tableele.appendChild(rowEle);
+
+                        //loading the particular information based on id
+                    }
+                });
+
+        });
+
+    </script>
+</body>
+
+</html>

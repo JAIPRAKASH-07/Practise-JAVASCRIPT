@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang =" en">
+<!-- make the form of html  -->
+<head>
+    <title>Login Form</title>
+    
+   <style>
+    body{  
+    margin: 0;
+    padding: 0;
+    
+    }
+main{
+margin: 0;
+height: 100vh;
+display: flex;
+align-items: center;
+justify-content: center;
+}
+form{
+    border-radius: 10px;
+    width: 300px;
+    padding: 25px;
+    box-shadow: 2px 2px 8px 2px whitesmoke;
+}
+.emailDiv, .passDiv ,.forgotpassword{
+    display: flex;
+    justify-content: space-between;
+    margin: 10px 0;
+    align-items: center;
+}
+label{
+    width: 30%;
+}
+#pwd, #email ,#forgotpassword{
+    width: 100%;
+    border: 1px solid rgba(0, 0, 0, 0.25);
+   padding: 8px;
+   border-radius: 10px;
+   margin: 0 10px;
+}
+.he{
+    padding: 10px;
+}
+#pwd:focus,#email:focus{
+   
+    border-color:  rgba(194, 221, 18, 0.741);
+ outline: none;
+
+}
+form a{
+    text-decoration:none;
+}
+
+form a:hover{
+    text-decoration: underline;
+}
+button{
+    border: none;
+    padding: 10px 25px ;
+    border-radius: 5px;
+    background-color: rgba(0, 0, 255, 0.75);
+    color: rgba(255, 255, 255, 0.86);
+}
+button:hover{
+    background-color: rgb(5, 13, 117);
+    color: white;
+}
+.btns{
+  
+    text-align: center;
+}
+
+   </style>
+</head>
+
+<body>
+    <main>
+        <form>
+                 <h3>welcome to  Login page </h3>
+                <div class="emailDiv" >
+                <label for="email"> Email:</label>
+                <input type="email" id="email" name="email" placeholder="eg: anil@gmil.co" />
+                </div>              
+               <div class="passDiv"  >
+                <label for="password"> Password:</label>
+                <input type="password" id="pwd" name="password" placeholder="password"/>
+               </div>
+               <div class="btns">
+                <button type= "submit" id="login"><a href=""> Logins  </a> </button>
+                <button type= "submit" id ="cancel"onclick="alert('hello')"> Cancal </button>
+             </div>
+        </form>
+
+    </main>
+    <script> 
+    let Email= document.getElementById("email").value;
+    let pswd= document.getElementById("pwd").value;
+    let Login= document.getElementById("login").value;
+    let Cancal= document.getElementById("cancel").value;
+
+
+    </script>
+</body>
+
+</html>

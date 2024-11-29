@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Table</title>
+</head>
+
+<body>
+    <button id="butn">
+        get btn
+    </button>
+
+    <script>
+
+        document.querySelector("#butn")
+            .addEventListener("click", (e) => {
+                var table = document.createElement("TABLE");
+                table.frame = 'box';
+                table.rules = 'all';
+                table.width = '100%';
+                // let thead = document.createElement('thead');
+                let row = document.createElement('tr');
+                let coloum1 = document.createElement('th');
+                let coloum2 = document.createElement('th');
+                let coloum3 = document.createElement('th');
+                let coloum4 = document.createElement('th');
+                let coloum5 = document.createElement('th');
+                let coloum6 = document.createElement('th');
+                let coloum7 = document.createElement('th');
+
+                document.body.appendChild(table)
+                table.appendChild(row);
+                row.appendChild(coloum1);
+                row.appendChild(coloum2);
+                row.appendChild(coloum3);
+                row.appendChild(coloum4);
+                row.appendChild(coloum5);
+                row.appendChild(coloum6);
+                row.appendChild(coloum7);
+                 // data sending in column;
+        
+         coloum1.textContent='ID';
+         coloum2.textContent='FirstName';
+         coloum3.textContent='LastName';
+         coloum4.textContent='Email';
+         coloum5.textContent='MobileNumber';
+         coloum6.textContent='Qualification';
+         coloum7.textContent='Gender';
+
+
+                const URL = "  http://77.37.45.2:9081/api/v1/employee/fetchallemployees";
+                //call the api
+                fetch(URL, {
+                    method: 'GET',
+                    headers: {
+                        "Content-type": "application/json; charset=UTF-8"
+                    }
+                })
+                .then(responce=>responce.json())
+           .then(data1=>{
+            console.log(data1);
+         
+        for(index=0; index<data1.length;index++){
+
+            let data=data1[index]
+
+        //creating 2nd row
+        let row1=document.createElement('tr')
+        row1.align='center'
+        //creating 2nd row coloumn
+        let row1col1=document.createElement('td')
+        let row1col2=document.createElement('td')
+        let row1col3=document.createElement('td')
+        let row1col4=document.createElement('td')
+        let row1col5=document.createElement('td')
+        let row1col6=document.createElement('td')
+        let row1col7=document.createElement('td')
+        
+        
+        row1col1.textContent=data.id
+        row1col2.textContent=data.firstName
+        row1col3.textContent=data.lastName
+        row1col4.textContent=data.email
+        row1col5.textContent=data.mobileNumber
+        row1col6.textContent=data.qualification
+        row1col7.textContent=data.gender
+       
+
+
+        table.appendChild(row1)
+        row1.appendChild(row1col1)
+        row1.appendChild(row1col2)
+        row1.appendChild(row1col3)
+        row1.appendChild(row1col4)
+        row1.appendChild(row1col5)
+        row1.appendChild(row1col6)
+        row1.appendChild(row1col7)
+       
+
+        }
+    })
+
+        });
+    
+
+    </script>
+</body>
+
+</html>

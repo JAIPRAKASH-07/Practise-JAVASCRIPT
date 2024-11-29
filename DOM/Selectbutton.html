@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SelectButton</title>
+</head>
+<body>
+    <label for="select"> Country</label>
+    <select name="select" id="selectid">
+        <option value="Ind" id="ind">India</option>
+        <option value="usa"id="usa">USA</option>
+        <option value="uk" id="uk">UK</option>
+        <option value="jan" id="jan">Japanese</option>
+    </select>
+    <button type="submit" id="indid">INDIA</button>
+    <button type="submit" id="usaid">USA</button>
+    <button type="submit" id="ukid">UK</button>
+    <button type="submit" id="janid">JAPANESE</button>
+<script>
+    let res = document.querySelector("#selectid")
+        .addEventListener("change", (e) => {
+            e.preventDefault();
+        })
+    document.querySelector("#indid")
+        .addEventListener("click", () => {
+            let val = document.querySelector("#ind")
+            val.selected = true
+        })
+    document.querySelector("#usaid")
+        .addEventListener("click", () => {
+            let val = document.querySelector("#usa")
+            val.selected = true
+        })
+    document.querySelector("#ukid")
+        .addEventListener("click", () => {
+            let val = document.querySelector("#uk")
+            val.selected = true
+        })
+    document.querySelector("#janid")
+        .addEventListener("click", () => {
+            let val = document.querySelector("#jan")
+            val.selected = true
+        })       
+</script>
+</body>
+</html>

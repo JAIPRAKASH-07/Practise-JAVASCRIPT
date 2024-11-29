@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>editpage</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f3f3f3;
+            margin: 0;
+            padding: 0;
+            
+        }
+
+        .main {
+            background-color: #fff;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+            padding: 15px;
+            width: 700px;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="password"],
+        select {
+            width: 100%;
+            margin-bottom: 15px;
+            padding: 10px;
+            box-sizing: border-box;
+           
+            border-radius: 5px;
+        }
+
+        button[type="submit"] {
+          margin-bottom: 7px;
+            border-radius: 10px;
+            border: none;
+            background-color: #4caf50;
+            color: white;
+            cursor: pointer;
+            width: 10%;
+            font-size: 16px;
+        }
+    </style>
+</head>
+
+    <body>
+        <div class="main">
+            <h2>EDITPAGE </h2>
+            <h3 id="msgid" style="color: blue;"></h3>
+    
+            <form id="empformid">
+                <input type="hidden" name="id" value="">
+                <label>FirstName:</label>
+                <input type="text" name="firstName" id="firstName" value="">
+               
+                <label>LastName:</label>
+                <input type="text" name="lastName" value="">
+               
+                <label>Email:</label>
+                <input type="text" name="email" value="">
+               
+                <label>Phone:</label>
+                <input type="text" name="phone" value="">
+               
+                <label for="genderid">Gender</label>
+                <input type="radio" id="genderid" name="gender" value="male" checked/>
+                <label for="genderid">Male</label>
+            
+                <input type="radio" id="genderid2" name="gender" value="female" />
+                <label for="genderid2">Female</label>
+                <br>
+                <br>
+                <label for="qf">Qualification</label>
+                <input type="checkbox" name="qf" id="qulificationid" value="BE/B.Tech">
+                 BE/B.Tech
+                <input type="checkbox" name="qf" id="qulificationid" value="ME/M.Tech">
+                 ME/M.Tech
+                <input type="checkbox" name="qf" id="qulificationid" value="PHD">
+                 PHD
+        
+                <br><br>
+        
+                <label for="stateid">Select State</label>
+                <select id="stateid">
+                    <option value="KA">Karnataka</option>
+                    <option value="AP">Andhra Pradesh</option>
+                    <option value="TS">Telangana</option>
+                    <option value="TN">TamilNadu</option>
+                </select>
+        
+              
+        
+                <label for="hobbiesid">Select Hobbies</label>
+                <select id="hobbiesid" multiple>
+                    <option value="cricket">Cricket</option>
+                    <option value="singning">singning</option>
+                    <option value="playing">Playing</option>
+                    <option value="driving">driving</option>
+                    <option value="Painting">Painting</option>
+                    <option value="Video game">Video game</option>
+                    <option value="Dance">Dance</option>
+                    <option value="Foreign language">  Foreign language</option>
+                </select>
+        
+               
+               
+                <button id="getallid" type="submit"  >Get All</button>
+                
+              
+            </form>
+              
+            <script>
+               
+                let empform = document.querySelector("#empformid");
+                let getallele = document.querySelector("#getallid");
+                getallele.addEventListener('click', (e)=> {      
+                  e.preventDefault() ;
+                  empform.reset();
+                 const URL = "http://77.37.45.2:9081/api/v1/employee/fetchallemployees"
+                 fetch(URL, {
+                    method: 'GET'
+                 })
+                 //reading response
+                   .then(response => response.json())
+                   .then(data => console.log(data));
+                });
+                  
+               
+                   
+            </script>
+    
+        </body>
+
+</html>

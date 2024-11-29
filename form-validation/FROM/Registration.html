@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>registration from</title>
+    <style>
+        body {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        main {
+            border-radius: 10px;
+            width: 600px;
+            padding: 25px;
+            box-shadow: 2px 2px 8px 2px whitesmoke;
+        }
+
+        .fieldDivs {
+            display: flex;
+            justify-content: space-between;
+            margin: 10px 0;
+            padding: 5px;
+            align-items: center;
+        }
+
+        label {
+            width: 30%;
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .inputFields {
+            width: 60%;
+            border: 1px solid rgba(0, 0, 0, 0.25);
+            padding: 10px 15px;
+            border-radius: 10px;
+            margin: 0 10px;
+            font-weight: 500;
+            font-size: 16px;
+        }
+
+        .genderDiv {
+            width: 70%;
+            padding: 2px;
+            border-radius: 20px;
+            margin: 5px 10px;
+        }
+
+        .Linkedin {
+            padding: 10px;
+            font-size: 20px;
+        }
+
+        .addressDiv .inputFields {
+            width: 80%;
+            border: 1px solid rgba(0, 0, 0, 0.25);
+            padding: 10px 15px;
+            border-radius: 10px;
+            margin: 0 10px;
+        }
+
+        .inputFields:focus {
+
+            border-color: rgba(234, 20, 20, 0.741);
+            outline: none;
+        }
+
+        form a {
+            text-decoration: none;
+        }
+
+        form a:hover {
+            color: gold;
+        }
+
+        button {
+            border: none;
+            padding: 10px 25px;
+            border-radius: 5px;
+            background-color: rgba(0, 0, 255, 0.75);
+            color: rgba(255, 255, 255, 0.86);
+        }
+
+        button:hover {
+            background-color: blue;
+            color: white;
+        }
+
+        .btns {
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+
+    <from>
+
+        <main>
+            <h1 style="text-align: center;">Registration</h1>
+            <div class="fieldDivs">
+                <label for=" firstname"> FullName:</label>
+                <input type="firstname" id="fullname" class="inputFields" value="" placeholder="eg: Alka sharama" />
+            </div>
+
+            <div class="fieldDivs">
+                <label for=" time"> Time:</label>
+                <input type="time" class="inputFields" id="time" value="" />
+            </div>
+
+            <div class="fieldDivs">
+                <label for=" phoneno"> phone Number:</label>
+                <input type="number" class="inputFields" id="phoneno" value="" placeholder="eg:9876543210" />
+            </div>
+            <div class="fieldDivs">
+                <label for="email"> Email:</label>
+                <input type="email" class="inputFields" id="email" value="" placeholder="eg: anil@gmil.co" />
+            </div>
+
+            <div class="fieldDivs">
+                <label for=" date"> Date</label>
+                <input type="date" id="date" class="inputFields" value="" />
+            </div>
+
+            <div class="genderDiv">
+                <label for="gender"> Gender:</label>
+                <input type="radio" name="gender" value="male" id="gender"> Male
+                <input type="radio" name="gender" value="female" id="gender"> Female
+            </div>
+
+            <div class="fieldDivs">
+                <label>Education</label>
+                <select class="inputFields" id="graduate" value="">
+                    <option value="">--select--</option>
+                    <option value="postgraduate">BCA</option>
+                    <option value="poatgraduate">B.Tech</option>
+                    <option value="undergraduate">M.Tech</option>
+                    <option value="undergraduate">MCA</option>
+                </select>
+            </div>
+            <div class="btns">
+                <button type="submit"> Registration </button>
+                <button type="reset"> Reset </button>
+            </div>
+        </main>
+    </from>
+    <script>
+        let res = document.addEventListener("click", demo);
+        function demo() {
+
+            let Aname = document.getElementById("fullname");
+            let Btime = document.getElementById("time");
+            let Cphoneno = document.getElementById("phoneno");
+            let Demail = document.getElementById("email");
+            let Fdate = document.getElementById("date");
+            let Ggraduate = document.getElementById("graduate");
+            let Hgender = document.getElementById("gender");
+            // console.log(Afullname , Btime,Cphoneno,Demail,Epwds,Fdate);
+            let result = {
+                Name: Aname.value,
+                Time: Btime.value,
+                Phone: Cphoneno.value,
+                Email: Demail.value,
+
+                Date: Fdate.value,
+                Gender: gender.value,
+                Graduate: Ggraduate.value
+            }
+            console.log(result);
+        }
+        let body=document.getElementsByTagName("body");
+         let htag=  document.createElement("h1");
+         htag.textContent="welcome  to website ";
+         console.log(htag);
+       document.body.appendChild(htag);
+    </script>
+</body>
+
+</html>

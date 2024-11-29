@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Radiobutton</title>
+</head>
+<body>
+    Male:<input type="radio" name="gender" id="maleid" value="">
+    Female:<input type="radio" name="gender" id="femaleid" value="">
+    <button id="but1">MALE</button>
+    <button id="but2">FEMALE</button>
+    <script>
+        document.querySelector("#but1")
+                .addEventListener("click",()=>{
+                    let res=document.querySelector("#maleid")
+                    res.checked = true
+                    console.log(res.checked);
+                })
+                document.querySelector("#but2")
+                        .addEventListener("click",()=>{
+                          let res=document.querySelector("#femaleid")
+                           res.checked = true
+                           console.log(res.checked);
+                })
+    </script>
+</body>
+</html>

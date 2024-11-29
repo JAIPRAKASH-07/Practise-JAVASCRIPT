@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>table 2</title>
+</head>
+<body>
+    <h3>ALL Employees</h3>
+
+    <button id="getallid">Get All</button>
+<br><br>
+    <table border="1" id="tableid">
+
+        <tr>
+            <th>ID</th>
+            <th>FirstName</th>
+            <th>LastName</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Gender</th>
+            <th>Qualification</th>
+            <th>State</th>   
+            <th>Hobbies</th>   
+            <th>Actions</th>       
+        </tr>
+
+    </table>
+
+
+    <script>
+        let getallele = document.querySelector("#getallid");
+        let tableele = document.getElementById('tableid');
+        getallele.addEventListener('click', (e)=> {      
+          e.preventDefault() ;
+         const URL = " http://77.37.45.2:9081/api/v1/employee/fetchallemployees";
+         fetch(URL, {
+            method: 'GET'
+         })
+         //reading response
+           .then(response => response.json())
+           .then(data => {
+            console.log(data);
+                for(let index = 0; index < data.length; index++) {
+                    
+                    const employee = data[index];
+                    let rowele = document.createElement('tr');
+
+                    let idtdele = document.createElement('td');
+                    idtdele.textContent = employee.id;
+                    rowele.appendChild(idtdele);
+
+                    let firstnametdele = document.createElement('td');
+                    firstnametdele.textContent = employee.firstName;
+                    rowele.appendChild(firstnametdele);
+
+                    let lastnametdele = document.createElement('td');
+                    lastnametdele.textContent = employee.lastName;
+                    rowele.appendChild(lastnametdele);
+
+                    let emailtdele = document.createElement('td');
+                    emailtdele.textContent = employee.email;
+                    rowele.appendChild(emailtdele);
+
+                    let phonetdele = document.createElement('td');
+                    phonetdele.textContent = employee.mobileNumber;
+                    rowele.appendChild(phonetdele);
+
+                    let gendertdele = document.createElement('td');
+                    gendertdele.textContent = employee.gender;
+                    rowele.appendChild(gendertdele);
+
+                    qualificationtdele = document.createElement('td');
+                    qualificationtdele.textContent = employee.qualification;
+                    rowele.appendChild(qualificationtdele);
+
+                    let statedele = document.createElement('td');
+                    statedele.textContent = employee.state;
+                    rowele.appendChild(statedele);
+
+                    let hobbiestdele = document.createElement('td');
+                    hobbiestdele.textContent = employee.hobbies;
+                    rowele.appendChild(hobbiestdele);
+
+                    let editactiontdele = document.createElement('td');
+                    var edita = document.createElement('a'); 
+                    var editlink = document.createTextNode("Edit");
+                  //var editlink=document.textContent("Edit")
+                    edita.appendChild(editlink); 
+                    edita.href = `editpage.html?id=${employee.id}&action=Edit`; 
+                    editactiontdele.appendChild(edita);
+                    rowele.appendChild(editactiontdele);
+
+                    edita.style.paddingRight = '10px';
+
+                    var deletea = document.createElement('a'); 
+                   var deletelink = document.createTextNode("Delete");
+                   // var deletelink = deletea.textContent("Delete");
+                    deletea.appendChild(deletelink); 
+                    deletea.href = `deletepage.html?id=${employee.id}&action=Delete`;
+                    editactiontdele.appendChild(deletea);
+                    rowele.appendChild(editactiontdele);
+                   
+
+                    tableele.appendChild(rowele);
+                                       
+
+                   
+                }
+            });
+        });
+    </script>
+</body>
+</html>

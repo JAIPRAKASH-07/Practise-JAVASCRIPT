@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Radiobutton</title>
+</head>
+<body>
+    
+    Male:<input type="radio" name="gender" id="maleid" value="">
+    Female:<input type="radio" name="gender" id="femaleid" value=""><br><br>
+    <button id="but1">MALE</button>
+    <button id="but2">FEMALE</button>
+<br><br><br>
+    <label for="select"> Country</label>
+<select name="select" id="selectid">
+    <option value="Ind" id="ind">B.tech</option>
+    <option value="usa"id="usa">M.tech</option>
+    <option value="uk" id="uk">BCA</option>
+    <option value="jan" id="jan">MCA</option>
+</select>
+<br> <br>
+<button type="submit" id="indid">B.Tech</button>
+<button type="submit" id="usaid">M.tech</button>
+<button type="submit" id="ukid">BCA</button>
+<button type="submit" id="janid">MCA</button>
+    <script>
+       
+        document.querySelector("#but1")
+            .addEventListener("click", () => {
+                let res1 = document.querySelector("#maleid")
+                res1.checked = true
+                console.log(res1.checked);
+            })
+        document.querySelector("#but2")
+            .addEventListener("click", () => {
+                let res1 = document.querySelector("#femaleid")
+                res1.checked = true
+                console.log(res1.checked);
+            })
+
+        let res = document.querySelector("#selectid")
+            .addEventListener("change", (e) => {
+                e.preventDefault();
+            })
+        document.querySelector("#indid")
+            .addEventListener("click", () => {
+                let val = document.querySelector("#ind")
+                val.selected = true
+            })
+        document.querySelector("#usaid")
+            .addEventListener("click", () => {
+                let val = document.querySelector("#usa")
+                val.selected = true
+            })
+        document.querySelector("#ukid")
+            .addEventListener("click", () => {
+                let val = document.querySelector("#uk")
+                val.selected = true
+            })
+        document.querySelector("#janid")
+            .addEventListener("click", () => {
+                let val = document.querySelector("#jan")
+                val.selected = true
+            })     
+    </script>
+
+</body>
+</html>
+
+

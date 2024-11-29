@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deletepage</title>
+</head>
+<body>
+ 
+<!-- The Modal -->
+<div id="myModal" class="modal">
+
+  <!-- Modal content -->
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <p></p>
+  </div>
+
+</div>
+       
+            
+           
+        
+           
+            <a href="tablenew.html">  <button id="myBtn" id="deletebtnid" > DELETE Button  </button></a>
+        
+            <script>
+                // Get the modal
+var modal = document.getElementById("myModal");
+
+// Get the button that opens the modal
+var btn = document.getElementById("myBtn");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks on the button, open the modal
+btn.onclick = function() {
+  modal.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+  modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+        
+                    document.querySelector("#deletebtnid")
+                    .addEventListener('click', (e)=>{
+                        e.preventDefault();
+                       
+                        const URL = 'http://77.37.45.2:9081/api/v1/employee/deleteemployee/2';
+
+
+                       
+                        fetch(URL, {
+                            method: "DELETE"
+                        })
+                        .then(response =>response.json())
+                        .then(json =>{
+                            console.log(json)
+                            console.log("Successfully Deleted");
+                        } )
+                        .catch(err => console.log(err));
+                     });
+        
+            </script>
+     
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Datalaa
+        
+    </title>
+</head>
+<body>
+    <h1 id="h1tagid">ajab kam  </h1>
+
+
+    <button id="button3" >Click Me3</button>
+    <button onclick="alerttest()" >Button1</button>
+    <button onclick="button4click(event)" >Button4</button>
+    <button id="button5">Button5</button>
+    
+
+    <script>
+      
+        document
+                .querySelector("#button3")
+                .addEventListener("dblclick", ()=>{
+                    console.log(" I am in double click");
+                });
+
+        document.querySelector("#h1tagid")
+            .addEventListener("mouseover", ()=>{
+                    console.log(" your are mouse up");
+            });
+
+        let alerttest = function () {
+            alert('I am alert button clik');
+        }
+       
+
+        function button4click(e) {
+            console.log("Hello button4click", e.target.name);
+            console.log(e.target.innerHTML);
+
+            e.target.innerHTML = "New Button"
+            e.target.style.color = "Blue"
+        }
+
+        document.querySelector("#button5")
+                .addEventListener('click', function(e) {
+                    console.log(e);
+                    console.log(e.target.innerHTML);
+                });
+
+    </script>
+</body>
+</html>
